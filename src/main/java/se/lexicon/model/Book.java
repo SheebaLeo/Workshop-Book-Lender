@@ -59,7 +59,7 @@ public class Book {
         return "Id: " + id + "," + "Title: " + title + "," + "Author: " + "," + author + "," + "IsAvailable: " + available;
     }
 
-    public void changeIsAvailable (boolean availability) {
-
+    public void changeAvailability (boolean availability) {
+        available = availability;
     }
 }

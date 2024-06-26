@@ -14,8 +14,10 @@ public class Person {
     private Book bookBorrowed;
 
     public Person(String firstName, String lastName) {
+        this.id = getNextId();
         this.firstName = firstName;
         this.lastName = lastName;
+        this.bookBorrowed = getBookBorrowed();
     }
 
     public int getSequencer() {
@@ -54,36 +56,44 @@ public class Person {
         this.bookBorrowed = isLoned;
     }
 
-    public int getNextId() {
-
-       // if (id != 0) {
-            int nextId = ++sequencer;
-            return nextId;
-       // }
+    private int getNextId() {
+        return ++sequencer;
     }
 
-    public void loanBook(Book book, Person person) {
+    /*public void loanBook(Book book, Person person) {
 
         if (book.getBorrower() != null) {
-
-            Book bookBorrowed = new Book(book.getTitle(), book.getAuthor());
             person.setBookBorrowed(book);
-            bookBorrowed.setBorrower(person);
+        } else {
+            throw new IllegalArgumentException("Borrower should not be null");
+        }
+    }*/
+
+    public void loanBook(Book book)  {
+        if (book.getBorrower() == null && book.getAvailable() == true) {
+            Person person2 = new Person("Ananaya", "Christopher Leo");
+            person2.setBookBorrowed(book);
+            book.setBorrower(person2);
+            book.changeAvailability(false);
+        } else {
+            throw new IllegalArgumentException("Book is already borrowed");
         }
     }
 
 
 
     public void returnBook (Book book) {
-        if (book.getAvailable() == false) {
-            bookBorrowed.getAvailable();
+        if (book.getAvailable() == false && book.getBorrower() != null) {
             Person person = new Person("", "");
+            person.setBookBorrowed(book);
             book.setBorrower(person);
-            person.bookBorrowed = book;
+            book.changeAvailability(true);
+        } else {
+            throw new IllegalArgumentException("Book is not borrowed");
         }
     }
 
     public String getPersonInformation() {
-        return "Id: " + id + "," + "first name: " + firstName + "," + "last name" + lastName + "," + "Books borrowed: " + bookBorrowed;
+        return "Id: " + id + "," + "first name: " + firstName + "," + "last name: " + lastName + "," + "Books borrowed: " + bookBorrowed;
     }
 }
