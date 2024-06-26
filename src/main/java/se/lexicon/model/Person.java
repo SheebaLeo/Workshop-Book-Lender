@@ -64,15 +64,15 @@ public class Person {
 
     public void loanBook(Book book, Person person) {
 
-        if (book.getAvailable() == true && book.getBorrower() != null) {
+        if (book.getBorrower() != null) {
 
             Book bookBorrowed = new Book(book.getTitle(), book.getAuthor());
             person.setBookBorrowed(book);
             bookBorrowed.setBorrower(person);
-            book = bookBorrowed;
-            System.out.println(book.getAvailable());
         }
     }
+
+
 
     public void returnBook (Book book) {
         if (book.getAvailable() == false) {

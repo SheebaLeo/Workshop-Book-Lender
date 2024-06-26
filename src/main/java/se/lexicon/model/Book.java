@@ -18,13 +18,13 @@ public class Book {
         this.id = UUID.randomUUID().toString().substring(0,7);
         this.title = title;
         this.author = author;
-        this.available = false;
+        this.available = true;
     }
 
     public Book(String title, String author, Person borrower) {
         this(title, author);
         this.borrower = borrower;
-        this.available = true;
+        this.available = false;
     }
 
     public String getId() {
